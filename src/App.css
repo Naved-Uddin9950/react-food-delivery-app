@@ -1,0 +1,19 @@
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 100, 100, 0.6);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(50, 50, 50, 0.3);
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin; /* "auto" or "thin" */
+    scrollbar-color: rgba(37, 36, 36, 0.336) rgba(68, 66, 66, 0.178); /* thumb color and track color */
+}
