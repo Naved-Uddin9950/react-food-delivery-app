@@ -20,20 +20,6 @@ import { Categories, Dashboard, DashboardHome, fetchCategories, fetchOrders, fet
 import ProductDetails from './components/Pages/Product/ProductDetails.jsx';
 import CategoryDetails from './components/Pages/Category/CategoryDetails.jsx';
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    const swUrl = `${import.meta.env.BASE_URL}sw.js`;
-    navigator.serviceWorker
-      .register(swUrl)
-      .then((registration) => {
-        console.log('Service Worker registered with scope:', registration.scope);
-      })
-      .catch((error) => {
-        console.log('Service Worker registration failed:', error);
-      });
-  });
-}
-
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
