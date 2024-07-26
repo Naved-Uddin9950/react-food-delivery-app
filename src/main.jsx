@@ -17,7 +17,8 @@ import Delivery from './components/Pages/Delivery.jsx';
 import PrivacyPolicy from './components/Pages/PrivacyPolicy.jsx';
 import Checkout from './components/Pages/Wallet/Checkout.jsx';
 import { Categories, Dashboard, DashboardHome, fetchCategories, fetchOrders, fetchProducts, Orders, Products } from './components/Admin/index.js';
-import Test from './Testing/Test.jsx';
+import ProductDetails from './components/Pages/Product/ProductDetails.jsx';
+import CategoryDetails from './components/Pages/Category/CategoryDetails.jsx';
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -49,7 +50,12 @@ const router = createBrowserRouter(
         <Route path='checkout' element={<Checkout />} />
         <Route path='signup' element={<Signup />} />
         <Route path='login' element={<Login />} />
+        
+        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/category/:id" element={<CategoryDetails />} />
+      
       </Route>
+
 
       {/* Admin routes */}
       <Route path='/dashboard' element={<Dashboard />}>
@@ -58,8 +64,6 @@ const router = createBrowserRouter(
         <Route path='orders' element={<Orders />} loader={fetchOrders} />
         <Route path='categories' element={<Categories />} loader={fetchCategories} />
       </Route>
-
-      <Route path="/test" element={<Test />} />
     </>
   )
 );

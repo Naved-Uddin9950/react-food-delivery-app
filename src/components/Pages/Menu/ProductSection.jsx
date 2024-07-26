@@ -1,6 +1,8 @@
 import React from 'react';
 import { Card, Typography } from 'antd';
 import { StarFilled } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
+import Loader from '../../Utils/Loader';
 
 const { Title } = Typography;
 
@@ -16,17 +18,19 @@ function ProductSection({
     title,
     products,
     cartHandler,
-    cartItems
+    cartItems,
+    limit
 }) {
+    const activeProducts = products.filter((item) => item.status === 'Active');
+    let limitedProducts = activeProducts;
 
-    const activeProducts = products.filter((item) => { return item.status === 'Active' });
-    const limitedProducts = activeProducts.length >= 5 ? activeProducts.slice(0, 5) : activeProducts;
+    if (limit !== false) {
+        limitedProducts = activeProducts.length >= 5 ? activeProducts.slice(0, limit) : activeProducts;
+    }
 
     if (!products || !activeProducts) {
         return (
-            <div className="flex justify-center items-center h-screen">
-                <Spin size="large" />
-            </div>
+            <Loader />
         );
     }
 
@@ -35,7 +39,6 @@ function ProductSection({
             <Title level={3} className='text-black dark:text-white'>{title}</Title>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                 {limitedProducts.length > 0 ? limitedProducts.map(product => {
-
                     const price = parseFloat(product.price);
                     const formattedPrice = isNaN(price) ? 'N/A' : price.toFixed(2);
 
@@ -43,6 +46,7 @@ function ProductSection({
 
                     return (
                         <Card
+                            key={product.id}
                             hoverable
                             style={{
                                 transition: 'transform 0.3s ease',
@@ -50,9 +54,11 @@ function ProductSection({
                             }}
                             onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(105%)'}
                             onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(100%)'}
-                            key={product.id}
-                            title={product.name}
-                            cover={<img alt={product.name} src={product.thumbnail || 'https://placehold.co/600x400/crimson/white?text=Image'} className="object-cover w-full h-40" />}
+                            cover={
+                                <Link to={`/product/${product.id}`}>
+                                    <img alt={product.name} src={product.thumbnail || 'https://placehold.co/600x400/crimson/white?text=Image'} className="object-cover w-full h-40 rounded-t-xl" />
+                                </Link>
+                            }
                             actions={[
                                 <div className='flex flex-row justify-center items-center w-full'>
                                     <span className="flex h-max- w-max px-2 py-1 gap-2 bg-green-500 rounded">
@@ -73,6 +79,11 @@ function ProductSection({
                             ]}
                             className="shadow-dark rounded-xl hover:shadow-dark"
                         >
+                            <Title level={4} className='text-black dark:text-white'>
+                                <Link to={`/product/${product.id}`}>
+                                    {product.name}
+                                </Link>
+                            </Title>
                             <p className='font-semibold'>Price: ${formattedPrice}</p>
                             <p className='flex flex-row justify-start items-center w-full mt-1 font-semibold'>
                                 {formatTags(product.tags) === 'Vegetarian' && (
@@ -95,7 +106,7 @@ function ProductSection({
                 )}
             </div>
         </div>
-    )
+    );
 }
 
-export default ProductSection
+export default ProductSection;

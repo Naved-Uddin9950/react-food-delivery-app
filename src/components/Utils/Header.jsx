@@ -29,7 +29,7 @@ const Header = () => {
     <>
       <header className="flex flex-col md:flex-row justify-between items-center w-full h-max py-4 px-4 lg:px-20 xg:px-36 shadow-dark gap-4 bg-[#87ceea] dark:bg-[#333333] dark:text-white">
         <div className="flex justify-between items-center w-full md:w-auto">
-          <div className="text-xl md:text-2xl lg:text-3xl font-bold text-red-800 dark:text-red-500">Tandoori Pizza</div>
+          <div className="text-xl md:text-2xl lg:text-3xl font-bold text-red-800 dark:text-red-500">{import.meta.env.VITE_APP_NAME}</div>
           <div className="md:hidden flex items-center gap-2">
             <div className="h-max w-full md:w-auto flex flex-row gap-4 justify-center items-center mx-12">
               <i className="fa-solid fa-cart-shopping cursor-pointer hover:text-blue-500" onClick={toggleCart}></i>

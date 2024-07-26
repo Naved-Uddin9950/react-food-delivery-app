@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Typography, Spin } from 'antd';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProductSection from './Menu/ProductSection';
 import { useCount } from '../../hooks';
 import CategorySection from './Menu/CategorySection';
+import Loader from '../Utils/Loader';
 
 const { Title } = Typography;
 
@@ -53,9 +54,7 @@ const Menu = () => {
 
   if (!categories || !products) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <Spin size="large" />
-      </div>
+      <Loader />
     );
   }
 
@@ -92,6 +91,8 @@ const Menu = () => {
     return countB - countA;
   });
 
+  const [productsLimit, setProductsLimit] = useState(5);
+
   return (
     <div className="p-4">
       <Title level={2} className="text-center mb-4 text-black dark:text-white">Welcome to {import.meta.env.VITE_APP_NAME}</Title>
@@ -101,7 +102,9 @@ const Menu = () => {
         {activeCategories.map(category => (
           <CategorySection
             key={category.id}
+            id={category.id}
             title={category.name}
+            image={category.image}
             description={category.description}
           />
         ))}
@@ -115,6 +118,7 @@ const Menu = () => {
             products={products.filter(product => product.category.includes(category.name))}
             cartHandler={cartHandler}
             cartItems={cartItems}
+            limit={productsLimit}
           />
         ))}
       </div>
