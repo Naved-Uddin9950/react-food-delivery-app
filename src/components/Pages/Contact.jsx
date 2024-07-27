@@ -7,87 +7,8 @@ const Contact = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
-  const formHandler = (e) => {
-    e.preventDefault();
-
-    if (!name) {
-      toast.error('Name is required!', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-      return;
-    }
-
-    const namePattern = /^[A-Za-z]{2,}$/;
-    if (!namePattern.test(name)) {
-      toast.error('Name must be at least 2 letters long and contain only alphabetical characters!', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-      return;
-    }
-
-    if (!email) {
-      toast.error('Email is required!', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-      return;
-    }
-
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-      toast.error('Invalid email format!', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-      return;
-    }
-
-    if (!message) {
-      toast.error('Message is required!', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-      return;
-    }
-
-    toast.success('Form submitted successfully!', {
+  const notify = (type, message) => {
+    toast[type](message, {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -98,6 +19,53 @@ const Contact = () => {
       theme: "light",
       transition: Bounce,
     });
+  }
+
+  const formHandler = async (e) => {
+    e.preventDefault();
+
+    if (!name) {
+      notify('error', 'Name is required!');
+      return;
+    }
+
+    const namePattern = /^[A-Za-z]+( [A-Za-z]+)*$/;
+    if (!namePattern.test(name)) {
+      notify('error', 'Name must be at least 2 letters long and contain only alphabetical characters!');
+      return;
+    }
+
+    if (!email) {
+      notify('error', 'Email is required!');
+      return;
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      notify('error', 'Invalid email format!');
+      return;
+    }
+
+    if (!message) {
+      notify('error', 'Message is required!');
+      return;
+    }
+
+    notify('warning', 'Form Sending...');
+
+    const formData = new FormData(e.target);
+    const EMAIL_ADDRESS = import.meta.env.VITE_EMAIL_ADDRESS;
+
+    const response = await fetch(`https://formsubmit.co/${EMAIL_ADDRESS}`, {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (response.ok) {
+      notify('success', 'Message sent successfully!');
+    } else {
+      notify('error', 'Error sending message.');
+    }
   }
 
   return (
