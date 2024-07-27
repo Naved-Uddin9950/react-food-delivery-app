@@ -1,105 +1,56 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { ToastContainer, toast, Bounce } from 'react-toastify';
+import React, { useEffect, useState } from 'react';
+import { Navigate, NavLink } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { auth } from '../../../firebaseConfig';
+import { notify } from '../../Utils/Notify';
+import { useAuth } from '../../../hooks/useAuth';
+import google from '/images/google.svg';
 
 const Signup = () => {
-    const [username, setUsername] = useState('');
+    const { user } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [redirect, setRedirect] = useState(false);
 
-    const formHandler = (e) => {
+    useEffect(() => {
+        if (user) {
+            const timer = setTimeout(() => {
+                setRedirect(true);
+            }, 3000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [user]);
+
+    if (redirect) {
+        return <Navigate to="/" />;
+    }
+
+    const formHandler = async (e) => {
         e.preventDefault();
 
-        if (!username) {
-            toast.error('Username is required!', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                transition: Bounce,
-            });
-            return;
+        try {
+            await createUserWithEmailAndPassword(auth, email, password);
+            notify('success', 'User registered successfully');
+            setEmail('');
+            setPassword('');
+        } catch (error) {
+            notify('error', error.message);
+            console.error('Error registering user:', error);
         }
-
-        if (!email) {
-            toast.error('Email is required!', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                transition: Bounce,
-            });
-            return;
-        }
-
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(email)) {
-            toast.error('Invalid email format!', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                transition: Bounce,
-            });
-            return;
-        }
-
-        if(!password) {
-            toast.error('Password is required!', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                transition: Bounce,
-            });
-            return;
-        }
-
-        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-        if (!passwordPattern.test(password)) {
-            toast.error('Password must be at least 8 characters long, contain at least one uppercase, lowercase, digits, and special characters!', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                transition: Bounce,
-            });
-            return;
-        }
-
-        toast.success('Form submitted successfully!', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-        });
     }
+
+    const googleAuth = async () => {
+        try {
+            const result = await signInWithPopup(auth, provider);
+            notify('success', 'Signed in successfully');
+        } catch (error) {
+            notify('error', 'Error signing in');
+            console.error('Error signing in:', error);
+        }
+    };
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen">
@@ -107,29 +58,16 @@ const Signup = () => {
                 <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-white">Sign Up</h2>
                 <form className="space-y-6" onSubmit={formHandler}>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300" htmlFor="username">
-                            Username
-                        </label>
-                        <input
-                            id="username"
-                            name="username"
-                            type="text"
-                            className="w-full px-3 py-2 border rounded dark:bg-gray-600 dark:text-white"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
-                    </div>
-                    <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300" htmlFor="email">
                             Email
                         </label>
                         <input
-                            id="email"
-                            name="email"
                             type="email"
-                            className="w-full px-3 py-2 border rounded dark:bg-gray-600 dark:text-white"
+                            placeholder="Email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            required
+                            className="w-full px-3 py-2 border rounded dark:bg-gray-600 dark:text-white"
                         />
                     </div>
                     <div>
@@ -137,12 +75,12 @@ const Signup = () => {
                             Password
                         </label>
                         <input
-                            id="password"
-                            name="password"
                             type="password"
-                            className="w-full px-3 py-2 border rounded dark:bg-gray-600 dark:text-white"
+                            placeholder="Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            required
+                            className="w-full px-3 py-2 border rounded dark:bg-gray-600 dark:text-white"
                         />
                     </div>
                     <div>
@@ -154,6 +92,13 @@ const Signup = () => {
                         </button>
                     </div>
                 </form>
+
+                <div className='flex flex-row justify-center items-center gap-2'>
+                    <button onClick={googleAuth} className='w-full px-4 py-2 font-semibold text-white bg-blue-700 rounded hover:bg-blue-800 flex flex-row justify-center items-center gap-2 mt-[-1rem]'>
+                        Sign In with Google <img src={google} alt="google" className='h-6' />
+                    </button>
+                </div>
+
                 <div className="text-sm text-center text-gray-600 dark:text-gray-300">
                     Already have an account?{' '}
                     <NavLink to="/login" className="text-blue-500 hover:text-blue-600">

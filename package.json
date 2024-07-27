@@ -28,6 +28,7 @@
     "react-router-dom": "^6.24.1",
     "react-stripe-checkout": "^2.6.3",
     "react-toastify": "^10.0.5",
+    "react-translate": "^7.0.1",
     "stripe": "^16.5.0"
   },
   "devDependencies": {

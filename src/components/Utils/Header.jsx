@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import useTheme from '../../contexts/ThemeContext';
 import Cart from './Cart'; // Import the Cart component
+import { auth } from '../../firebaseConfig';
+import { signOut } from 'firebase/auth';
+import { useAuth } from '../../hooks/useAuth';
+import { notify } from './Notify';
 
 const Header = () => {
+  const { user } = useAuth();
   const { theme, setTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false); // State for cart modal
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const toggleDarkMode = () => {
     setTheme(!theme);
@@ -23,6 +28,16 @@ const Header = () => {
 
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen); // Toggle cart modal visibility
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      notify('success', 'Signed out successfully');
+    } catch (error) {
+      notify('error', 'Error signing out');
+      console.error('Error signing out:', error);
+    }
   };
 
   return (
@@ -99,14 +114,22 @@ const Header = () => {
             />
           </div>
           <div className="flex md:hidden flex-row justify-center items-center gap-4">
-            <button
-              type="button"
-              className="border rounded-2xl py-1 px-3 font-semibold shadow hover:text-blue-500"
-            >
-              <Link to="/login">
-                Login
-              </Link>
-            </button>
+            {
+              user === null && <button
+                type="button"
+                className="rounded-2xl py-1 px-3 font-semibold shadow-dark bg-blue-500 hover:bg-blue-600"
+              >
+                <Link to="/login">
+                  Login
+                </Link>
+              </button>
+            }
+            {
+              user !== null &&
+              <button onClick={handleSignOut} className='rounded-2xl py-1 px-3 font-semibold shadow-dark bg-red-500 hover:bg-600'>
+                Sign Out
+              </button>
+            }
           </div>
         </div>
 
@@ -126,14 +149,22 @@ const Header = () => {
           <i className="fa-solid fa-cart-shopping cursor-pointer hover:text-blue-500" onClick={toggleCart}></i>
           <i className="fa-solid fa-moon cursor-pointer" id="theme-switch" onClick={toggleDarkMode}></i>
           <i className="fa-solid fa-globe cursor-pointer"></i>
-          <button
-            type="button"
-            className="rounded-2xl py-1 px-3 font-semibold shadow-dark hover:text-blue-500"
-          >
-            <Link to="/login">
-              Login
-            </Link>
-          </button>
+          {
+            user === null && <button
+              type="button"
+              className="rounded-2xl py-1 px-3 font-semibold shadow-dark bg-blue-500 hover:bg-blue-600"
+            >
+              <Link to="/login">
+                Login
+              </Link>
+            </button>
+          }
+          {
+            user !== null &&
+            <button onClick={handleSignOut} className='rounded-2xl py-1 px-3 font-semibold shadow-dark bg-red-500 hover:bg-600'>
+              Sign Out
+            </button>
+          }
         </div>
       </header>
 
