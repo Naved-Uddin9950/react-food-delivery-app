@@ -40,5 +40,9 @@
     "Home": {
         "featured": "Producto Destacado",
         "special": "Ofertas Especiales"
+    },
+    "Menu": {
+        "welcome": "Bienvenido a {{name}}",
+        "categories": "Categorías"
     }
 }

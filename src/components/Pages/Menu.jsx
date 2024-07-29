@@ -9,6 +9,7 @@ import ProductSection from './Menu/ProductSection';
 import { useCount } from '../../hooks';
 import CategorySection from './Menu/CategorySection';
 import Loader from '../Utils/Loader';
+import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography;
 
@@ -92,12 +93,13 @@ const Menu = () => {
   });
 
   const [productsLimit, setProductsLimit] = useState(5);
+  const { t } = useTranslation();
 
   return (
     <div className="p-4">
-      <Title level={2} className="text-center mb-4 text-black dark:text-white">Welcome to {import.meta.env.VITE_APP_NAME}</Title>
+      <Title level={2} className="text-center mb-4 text-black dark:text-white">{t('Menu.welcome', { name: import.meta.env.VITE_APP_NAME })} </Title>
 
-      <Title level={2} className="text-black dark:text-white">Categories</Title>
+      <Title level={2} className="text-black dark:text-white">{t('Menu.categories')}</Title>
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-12'>
         {activeCategories.map(category => (
           <CategorySection
