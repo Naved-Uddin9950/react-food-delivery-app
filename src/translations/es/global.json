@@ -44,5 +44,15 @@
     "Menu": {
         "welcome": "Bienvenido a {{name}}",
         "categories": "Categorías"
+    },
+    "Location": {
+        "location": "Ubicación",
+        "heading": "Nuestra Ubicación",
+        "address": "Dirección",
+        "contact": "Contacto",
+        "operation": "Horas de Atención",
+        "hours": "Lunes a Viernes: 9:00 AM - 6:00 PM",
+        "phone": "Teléfono",
+        "email": "Correo Electrónico"
     }
 }
