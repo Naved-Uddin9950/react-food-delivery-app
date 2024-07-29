@@ -35,7 +35,15 @@
     },
     "notify": {
         "logout_success": "Log out successfully",
-        "logout_error": "Error logging out"
+        "logout_error": "Error logging out",
+        "name_required": "Name is required!",
+        "name_rules": "Name must be at least 2 letters long and contain only alphabetical characters!",
+        "email_required": "Email is required!",
+        "email_rules": "Invalid email format!",
+        "message_required": "Message is required!",
+        "message_sending": "Form Sending...",
+        "message_sent": "Message sent successfully!",
+        "message_error": "Error sending message."
     },
     "Home": {
         "featured": "Featured Product",
@@ -54,5 +62,12 @@
         "hours": "Monday to Friday: 9:00 AM - 6:00 PM",
         "phone": "Phone",
         "email": "Email"
+    },
+    "Contact": {
+        "contact": "Contact Us",
+        "name": "Name",
+        "email": "Email",
+        "message": "Message",
+        "send": "Send Message"
     }
 }

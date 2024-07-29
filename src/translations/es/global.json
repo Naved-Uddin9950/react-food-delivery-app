@@ -34,8 +34,16 @@
         "copyright": "Copyright 2024 @ {{url}} - Todos los Derechos Reservados"
     },
     "notify": {
-        "logout_success": "Has cerrado sesión correctamente",
-        "logout_error": "Error al cerrar sesión"
+        "logout_success": "Cierre de sesión exitoso",
+        "logout_error": "Error al cerrar sesión",
+        "name_required": "¡El nombre es obligatorio!",
+        "name_rules": "¡El nombre debe tener al menos 2 letras y contener solo caracteres alfabéticos!",
+        "email_required": "¡El correo electrónico es obligatorio!",
+        "email_rules": "¡Formato de correo electrónico inválido!",
+        "message_required": "¡El mensaje es obligatorio!",
+        "message_sending": "Enviando formulario...",
+        "message_sent": "¡Mensaje enviado exitosamente!",
+        "message_error": "Error al enviar el mensaje."
     },
     "Home": {
         "featured": "Producto Destacado",
@@ -54,5 +62,12 @@
         "hours": "Lunes a Viernes: 9:00 AM - 6:00 PM",
         "phone": "Teléfono",
         "email": "Correo Electrónico"
+    },
+    "Contact": {
+        "contact": "Contáctanos",
+        "name": "Nombre",
+        "email": "Correo Electrónico",
+        "message": "Mensaje",
+        "send": "Enviar Mensaje"
     }
 }

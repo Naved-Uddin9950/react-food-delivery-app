@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -25,33 +26,33 @@ const Contact = () => {
     e.preventDefault();
 
     if (!name) {
-      notify('error', 'Name is required!');
+      notify('error', t('notify.name_required'));
       return;
     }
 
     const namePattern = /^[A-Za-z]+( [A-Za-z]+)*$/;
     if (!namePattern.test(name)) {
-      notify('error', 'Name must be at least 2 letters long and contain only alphabetical characters!');
+      notify('error', t('notify.name_rules'));
       return;
     }
 
     if (!email) {
-      notify('error', 'Email is required!');
+      notify('error', t('notify.email_required'));
       return;
     }
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
-      notify('error', 'Invalid email format!');
+      notify('error', t('notify.email_rules'));
       return;
     }
 
     if (!message) {
-      notify('error', 'Message is required!');
+      notify('error', t('notify.message_required'));
       return;
     }
 
-    notify('warning', 'Form Sending...');
+    notify('warning', t('notify.message_sending'));
 
     const formData = new FormData(e.target);
     const EMAIL_ADDRESS = import.meta.env.VITE_EMAIL_ADDRESS;
@@ -62,20 +63,22 @@ const Contact = () => {
     });
 
     if (response.ok) {
-      notify('success', 'Message sent successfully!');
+      notify('success', t('notify.message_sent'));
     } else {
-      notify('error', 'Error sending message.');
+      notify('error', t('notify.message_error'));
     }
   }
+
+  const { t } = useTranslation();
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded shadow-dark dark:bg-gray-700">
-        <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-white">Contact Us</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-white">{t('Contact.contact')}</h2>
         <form className="space-y-6" onSubmit={formHandler}>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300" htmlFor="name">
-              Name
+              {t('Contact.name')}
             </label>
             <input
               id="name"
@@ -88,7 +91,7 @@ const Contact = () => {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300" htmlFor="email">
-              Email
+              {t('Contact.email')}
             </label>
             <input
               id="email"
@@ -101,7 +104,7 @@ const Contact = () => {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300" htmlFor="message">
-              Message
+              {t('Contact.message')}
             </label>
             <textarea
               id="message"
@@ -116,7 +119,7 @@ const Contact = () => {
               type="submit"
               className="w-full px-4 py-2 font-semibold text-white bg-blue-500 rounded hover:bg-blue-600"
             >
-              Send Message
+              {t('Contact.send')}
             </button>
           </div>
         </form>
