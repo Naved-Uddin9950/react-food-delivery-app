@@ -1,27 +1,25 @@
-import React, { useEffect, useState, useTransition } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navigate, NavLink } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { provider, auth } from '../../../firebaseConfig';
 import { signInWithPopup, signOut, signInWithEmailAndPassword } from 'firebase/auth';
 import { notify } from '../../Utils/Notify';
 import google from '/images/google.svg';
 import { useAuth } from '../../../hooks/useAuth';
 import { useTranslation } from 'react-i18next';
+import { auth, provider } from '../../../firebaseConfig';
 
 const Login = () => {
     const { user } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (user) {
-            const timer = setTimeout(() => {
-                setRedirect(true);
-            }, 3000); // 3-second delay
-
-            return () => clearTimeout(timer); // Clean up the timeout if the component unmounts
+            const timer = setTimeout(() => setRedirect(true), 3000);
+            return () => clearTimeout(timer);
         }
     }, [user]);
 
@@ -31,7 +29,7 @@ const Login = () => {
 
     const handleSignIn = async () => {
         try {
-            const result = await signInWithPopup(auth, provider);
+            await signInWithPopup(auth, provider);
             notify('success', t('notify.login_success'));
         } catch (error) {
             notify('error', t('notify.login_error'));
@@ -51,7 +49,6 @@ const Login = () => {
 
     const formHandler = async (e) => {
         e.preventDefault();
-
         try {
             await signInWithEmailAndPassword(auth, email, password);
             notify('success', t('notify.login_success'));
@@ -62,8 +59,6 @@ const Login = () => {
             console.error('Error login user:', error);
         }
     };
-
-    const { t } = useTranslation();
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen">
