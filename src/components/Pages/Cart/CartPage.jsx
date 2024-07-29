@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart, setQuantity } from '../../../features/cart/cartSlice';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart); // Access cart array correctly
@@ -21,13 +22,14 @@ const Cart = () => {
   };
 
   const totalAmount = cartItems ? cartItems.reduce((total, item) => total + item.price * item.quantity, 0) : 0;
+  const { t } = useTranslation();
 
   return (
     <div className="py-8 md:px-20 lg:px-36">
-      <h2 className="text-3xl font-bold text-center mb-8 dark:text-white">Cart</h2>
+      <h2 className="text-3xl font-bold text-center mb-8 dark:text-white">{t('Cart.cart')}</h2>
       {cartItems.length === 0 ? (
         <div className='flex flex-col justify-center items-center gap-4'>
-          <p className="text-center dark:text-gray-300">Your cart is empty.</p>
+          <p className="text-center dark:text-gray-300">{t('Cart.empty')}</p>
           <button className="self-center mt-4 px-8 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600">
             <Link to="/menu">
               Shopping
@@ -64,12 +66,12 @@ const Cart = () => {
             </div>
           ))}
           <div className="flex justify-between items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md">
-            <h3 className="font-semibold text-lg dark:text-white">Total</h3>
+            <h3 className="font-semibold text-lg dark:text-white">{t('Cart.total')}</h3>
             <h3 className="font-semibold text-lg dark:text-white">${totalAmount.toFixed(2)}</h3>
           </div>
           <button className="self-center mt-4 px-8 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600">
             <Link to="/checkout">
-              Checkout
+              {t('Cart.checkout')}
             </Link>
           </button>
         </div>

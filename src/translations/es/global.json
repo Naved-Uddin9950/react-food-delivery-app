@@ -69,5 +69,12 @@
         "email": "Correo Electrónico",
         "message": "Mensaje",
         "send": "Enviar Mensaje"
+    },
+    "Cart": {
+        "cart": "Carrito de Compras",
+        "empty": "Tu carrito está vacío.",
+        "goto": "Ir al carrito",
+        "total": "Total",
+        "checkout": "Pagar"
     }
 }

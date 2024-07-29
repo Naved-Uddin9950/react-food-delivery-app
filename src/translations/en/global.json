@@ -69,5 +69,12 @@
         "email": "Email",
         "message": "Message",
         "send": "Send Message"
+    },
+    "Cart": {
+        "cart": "Shopping Cart",
+        "empty": "Your cart is empty.",
+        "goto": "Go to cart",
+        "total": "Total",
+        "checkout": "Checkout"
     }
 }
