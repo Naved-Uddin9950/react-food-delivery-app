@@ -36,5 +36,9 @@
     "notify": {
         "logout_success": "Log out successfully",
         "logout_error": "Error logging out"
+    },
+    "Home": {
+        "featured": "Featured Product",
+        "special": "Special Offers"
     }
 }

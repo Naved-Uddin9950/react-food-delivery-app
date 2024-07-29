@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import HeroSection from './Home/HeroSection';
 import ProductSection from './Menu/ProductSection';
 import { useRand } from '../../hooks';
+import { useTranslation } from 'react-i18next';
 
 export const fetchCategories = async () => {
     try {
@@ -79,19 +80,21 @@ const Home = () => {
         }
     };
 
+    const { t } = useTranslation();
+
     return (
         <div className=''>
             <HeroSection />
 
             <div className="">
                 <div className="container mx-auto px-4">
-                    <ProductSection title="Featured Product" products={featuredProducts} cartHandler={cartHandler} cartItems={cartItems} />
+                    <ProductSection title={t("Home.featured")} products={featuredProducts} cartHandler={cartHandler} cartItems={cartItems} />
                 </div>
             </div>
 
             <section className="">
                 <div className="container mx-auto px-4">
-                    <ProductSection title="Special Offers" products={specialOffers} cartHandler={cartHandler} cartItems={cartItems} />
+                    <ProductSection title={t("Home.special")} products={specialOffers} cartHandler={cartHandler} cartItems={cartItems} />
                 </div>
             </section>
 

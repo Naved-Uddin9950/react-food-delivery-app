@@ -36,5 +36,9 @@
     "notify": {
         "logout_success": "Has cerrado sesión correctamente",
         "logout_error": "Error al cerrar sesión"
+    },
+    "Home": {
+        "featured": "Producto Destacado",
+        "special": "Ofertas Especiales"
     }
 }
