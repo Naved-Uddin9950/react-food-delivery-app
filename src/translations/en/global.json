@@ -114,5 +114,8 @@
         "logout": "Logout",
         "google": "Sign In with Google",
         "noAccount": "Don't have an account?"
+    },
+    "Auth": {
+        "login_first": "You need to login first"
     }
 }

@@ -114,5 +114,8 @@
         "logout": "Cerrar Sesión",
         "google": "Inicia Sesión con Google",
         "noAccount": "¿No tienes una cuenta?"
+    },
+    "Auth": {
+        "login_first": "Debes iniciar sesión primero"
     }
 }

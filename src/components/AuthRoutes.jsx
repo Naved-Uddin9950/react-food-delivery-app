@@ -3,9 +3,11 @@ import { Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { notify } from './Utils/Notify';
 import { ToastContainer } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 export const AuthRoute = ({ element: Element, ...rest }) => {
   const { user } = useAuth();
+  const { t } = useTranslation();
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
@@ -24,7 +26,8 @@ export const AuthRoute = ({ element: Element, ...rest }) => {
     <Element {...rest} />
     :
     <>
-      <div className='w-full h-screen flex justify-center items-center text-black dark:text-white font-bold text-2xl'>You need to login first
+      <div className='w-full h-screen flex justify-center items-center text-black dark:text-white font-bold text-2xl'>
+        {t('Auth.login_first')}
       </div>;
       <ToastContainer />
     </>
