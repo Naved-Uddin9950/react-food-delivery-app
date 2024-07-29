@@ -40,10 +40,16 @@
         "name_rules": "Name must be at least 2 letters long and contain only alphabetical characters!",
         "email_required": "Email is required!",
         "email_rules": "Invalid email format!",
+        "address_required": "Address is required",
+        "city_required": "City is required",
+        "state_requried": "State is required",
+        "zip_required": "Zip/Postal Code is required",
         "message_required": "Message is required!",
         "message_sending": "Form Sending...",
         "message_sent": "Message sent successfully!",
-        "message_error": "Error sending message."
+        "message_error": "Error sending message.",
+        "payment_success": "Payment Successful!",
+        "payment_error": "Error processing payment: {{error}}"
     },
     "Home": {
         "featured": "Featured Product",
@@ -76,5 +82,17 @@
         "goto": "Go to cart",
         "total": "Total",
         "checkout": "Checkout"
+    },
+    "Checkout": {
+        "checkout": "Checkout",
+        "empty": "Your Cart is empty. Please order something to make Payment",
+        "fullname": "Full Name",
+        "email": "Email",
+        "address": "Address",
+        "city": "City",
+        "state": "State",
+        "zip": "Zip Code",
+        "total": "Total Amount",
+        "payment": "Complete Payment"
     }
 }

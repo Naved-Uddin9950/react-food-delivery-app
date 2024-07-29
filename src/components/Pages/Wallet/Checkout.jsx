@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearCart } from '../../../features/cart/cartSlice';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { addOrder } from '../../../database/orderService';
+import { useTranslation } from 'react-i18next';
+import { notify } from '../../Utils/Notify';
 
 const Checkout = () => {
     const [formData, setFormData] = useState({
@@ -29,16 +31,7 @@ const Checkout = () => {
 
     const handlePayment = async () => {
         try {
-            // Simulate a successful payment
-            toast.success('Payment Successful!', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            notify('success', t('notify.payment_success'));
 
             // Add each item in the cart to Firestore
             const orderPromises = cartItems.map(item => {
@@ -57,7 +50,7 @@ const Checkout = () => {
             // Clear cart after successful payment
             dispatch(clearCart());
         } catch (error) {
-            toast.error('Error processing payment:', error.message);
+            notify('error', t('notify.payment_error', { error: error.message }));
         }
     };
 
@@ -66,7 +59,7 @@ const Checkout = () => {
         const isValid = validateForm();
 
         if (isValid) {
-            handlePayment(); // Call the payment function
+            handlePayment();
         }
     };
 
@@ -75,59 +68,61 @@ const Checkout = () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if (!name) {
-            toast.error('Name is required');
+            notify('error', t('notify.name_required'));
             return false;
         }
 
         if (name.length < 2 || !/^[A-Za-z]+$/.test(name)) {
-            toast.error('Invalid name. It should be at least 2 letters long and only contain alphabets.');
+            notify('error', t('notify.name_rules'));
             return false;
         }
 
         if (!email) {
-            toast.error('Email is required');
+            notify('error', t('notify.email_required'));
             return false;
         }
 
         if (!emailRegex.test(email)) {
-            toast.error('Invalid email address.');
+            notify('error', t('notify.email_rules'))
             return false;
         }
 
         if (!address) {
-            toast.error('Address is required');
+            notify('error', t('notify.address_required'));
             return false;
         }
 
         if (!city) {
-            toast.error('City is required');
+            notify('error', t('notify.city_required'));
             return false;
         }
 
         if (!state) {
-            toast.error('State is required');
+            notify('error', t('notify.state_required'));
             return false;
         }
 
         if (!zip) {
-            toast.error('Zip/Postal Code is required');
+            notify('error', t('notify.zip_required'));
             return false;
         }
 
         return true;
     };
 
+    const { t } = useTranslation();
+
     return (
         <div className="flex flex-col items-center justify-center min-h-screen p-8 dark:text-white">
             <ToastContainer />
-            <h1 className="text-4xl font-bold mb-8">Checkout</h1>
+            <h1 className="text-4xl font-bold mb-8">{t('Checkout.checkout')}</h1>
             {
                 totalAmount <= 0 ?
-                    <div>Your Cart is empty. Please order something to make Payment</div> :
+                    <div>{t('Checkout.empty')}</div> :
                     <form onSubmit={handleSubmit} className="w-full max-w-lg space-y-6 bg-white rounded-lg p-8 shadow-lg dark:bg-gray-700">
                         <div>
                             <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                                Full Name
+                                {t('Checkout.fullname')}
                             </label>
                             <input
                                 id="name"
@@ -140,7 +135,7 @@ const Checkout = () => {
                         </div>
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                                Email
+                                {t('Checkout.email')}
                             </label>
                             <input
                                 id="email"
@@ -153,7 +148,7 @@ const Checkout = () => {
                         </div>
                         <div>
                             <label htmlFor="address" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                                Address
+                                {t('Checkout.address')}
                             </label>
                             <input
                                 id="address"
@@ -167,7 +162,7 @@ const Checkout = () => {
                         <div className="flex flex-wrap space-y-4 sm:space-y-0 sm:space-x-4">
                             <div className="w-full sm:w-1/3">
                                 <label htmlFor="city" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                                    City
+                                    {t('Checkout.city')}
                                 </label>
                                 <input
                                     id="city"
@@ -180,7 +175,7 @@ const Checkout = () => {
                             </div>
                             <div className="w-full sm:w-1/3">
                                 <label htmlFor="state" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                                    State
+                                    {t('Checkout.state')}
                                 </label>
                                 <input
                                     id="state"
@@ -193,7 +188,7 @@ const Checkout = () => {
                             </div>
                             <div className="w-full sm:w-1/3">
                                 <label htmlFor="zip" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                                    Zip Code
+                                    {t('Checkout.zip')}
                                 </label>
                                 <input
                                     id="zip"
@@ -207,7 +202,7 @@ const Checkout = () => {
                         </div>
                         <div>
                             <label htmlFor="total" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                                Total Amount
+                                {t('Checkout.total')}
                             </label>
                             <input
                                 id="total"
@@ -223,7 +218,7 @@ const Checkout = () => {
                                 type="submit"
                                 className="w-full px-4 py-2 font-semibold text-white bg-blue-500 rounded hover:bg-blue-600"
                             >
-                                Complete Payment
+                                {t('Checkout.payment')}
                             </button>
                         </div>
                     </form>

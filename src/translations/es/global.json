@@ -40,10 +40,16 @@
         "name_rules": "¡El nombre debe tener al menos 2 letras y contener solo caracteres alfabéticos!",
         "email_required": "¡El correo electrónico es obligatorio!",
         "email_rules": "¡Formato de correo electrónico inválido!",
+        "address_required": "La dirección es obligatoria",
+        "city_required": "La ciudad es obligatoria",
+        "state_required": "El estado es obligatorio",
+        "zip_required": "El código postal es obligatorio",
         "message_required": "¡El mensaje es obligatorio!",
         "message_sending": "Enviando formulario...",
         "message_sent": "¡Mensaje enviado exitosamente!",
-        "message_error": "Error al enviar el mensaje."
+        "message_error": "Error al enviar el mensaje.",
+        "payment_success": "¡Pago exitoso!",
+        "payment_error": "Error al procesar el pago: {{error}}"
     },
     "Home": {
         "featured": "Producto Destacado",
@@ -76,5 +82,17 @@
         "goto": "Ir al carrito",
         "total": "Total",
         "checkout": "Pagar"
+    },
+    "Checkout": {
+        "checkout": "Pagar",
+        "empty": "Tu carrito está vacío. Por favor, ordena algo para realizar el pago.",
+        "fullname": "Nombre Completo",
+        "email": "Correo Electrónico",
+        "address": "Dirección",
+        "city": "Ciudad",
+        "state": "Estado",
+        "zip": "Código Postal",
+        "total": "Monto Total",
+        "payment": "Completar Pago"
     }
 }
