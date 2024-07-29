@@ -1,25 +1,24 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import useTheme from '../../contexts/ThemeContext';
-import Cart from './Cart'; // Import the Cart component
+import Cart from './Cart';
 import { auth } from '../../firebaseConfig';
 import { signOut } from 'firebase/auth';
 import { useAuth } from '../../hooks/useAuth';
 import { notify } from './Notify';
+import { useTranslation } from 'react-i18next';
 
 const Header = () => {
   const { user } = useAuth();
   const { theme, setTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+  const { t, i18n } = useTranslation();
 
   const toggleDarkMode = () => {
     setTheme(!theme);
-    if (theme) {
-      document.documentElement.classList.remove('dark');
-    } else {
-      document.documentElement.classList.add('dark');
-    }
+    document.documentElement.classList.toggle('dark', !theme);
   };
 
   const toggleMenu = () => {
@@ -27,29 +26,40 @@ const Header = () => {
   };
 
   const toggleCart = () => {
-    setIsCartOpen(!isCartOpen); // Toggle cart modal visibility
+    setIsCartOpen(!isCartOpen);
+  };
+
+  const toggleLanguageMenu = () => {
+    setIsLanguageMenuOpen(!isLanguageMenuOpen);
   };
 
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      notify('success', 'Signed out successfully');
+      notify('success', t('notify.logout_success'));
     } catch (error) {
-      notify('error', 'Error signing out');
+      notify('error', t('notify.logout_error'));
       console.error('Error signing out:', error);
     }
+  };
+
+  const handleChangeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+    setIsLanguageMenuOpen(false); // Close menu after selection
   };
 
   return (
     <>
       <header className="flex flex-col md:flex-row justify-between items-center w-full h-max py-4 px-4 lg:px-20 xg:px-36 shadow-dark gap-4 bg-[#87ceea] dark:bg-[#333333] dark:text-white">
         <div className="flex justify-between items-center w-full md:w-auto">
-          <div className="text-xl md:text-2xl lg:text-3xl font-bold text-red-800 dark:text-red-500">{import.meta.env.VITE_APP_NAME}</div>
+          <div className="text-xl md:text-2xl lg:text-3xl font-bold text-red-800 dark:text-red-500">
+            {import.meta.env.VITE_APP_NAME}
+          </div>
           <div className="md:hidden flex items-center gap-2">
             <div className="h-max w-full md:w-auto flex flex-row gap-4 justify-center items-center mx-12">
               <i className="fa-solid fa-cart-shopping cursor-pointer hover:text-blue-500" onClick={toggleCart}></i>
               <i className="fa-solid fa-moon cursor-pointer" id="theme-switch" onClick={toggleDarkMode}></i>
-              <i className="fa-solid fa-globe cursor-pointer"></i>
+              <i className="fa-solid fa-globe cursor-pointer" onClick={toggleLanguageMenu}></i>
             </div>
             <button className="text-3xl" onClick={toggleMenu}>
               <i className="fa-solid fa-bars"></i>
@@ -66,7 +76,7 @@ const Header = () => {
                 : 'hover:text-blue-500 hover:border-b-2 hover:border-blue-500 font-semibold text-sm md:text-base lg:text-lg'
             }
           >
-            Home
+            {t('Header.home')}
           </NavLink>
 
           <NavLink
@@ -77,7 +87,7 @@ const Header = () => {
                 : 'hover:text-blue-500 hover:border-b-2 hover:border-blue-500 font-semibold text-sm md:text-base lg:text-lg'
             }
           >
-            Menu
+            {t('Header.menu')}
           </NavLink>
 
           <NavLink
@@ -88,7 +98,7 @@ const Header = () => {
                 : 'hover:text-blue-500 hover:border-b-2 hover:border-blue-500 font-semibold text-sm md:text-base lg:text-lg'
             }
           >
-            Location
+            {t('Header.location')}
           </NavLink>
 
           <NavLink
@@ -99,8 +109,9 @@ const Header = () => {
                 : 'hover:text-blue-500 hover:border-b-2 hover:border-blue-500 font-semibold text-sm md:text-base lg:text-lg'
             }
           >
-            Contact
+            {t('Header.contact')}
           </NavLink>
+
           <div className="relative h-max w-full md:w-auto md:hidden">
             <label htmlFor="search" className="absolute top-1 left-1">
               <i className="fa-solid fa-magnifying-glass text-black"></i>
@@ -110,9 +121,10 @@ const Header = () => {
               name="q"
               id="search"
               className="border rounded-xl shadow py-1 pl-6 w-full md:w-64 dark:text-black"
-              placeholder="Onion Pizza"
+              placeholder={t('Header.search_placeholder')}
             />
           </div>
+
           <div className="flex md:hidden flex-row justify-center items-center gap-4">
             {
               user === null && <button
@@ -120,14 +132,14 @@ const Header = () => {
                 className="rounded-2xl py-1 px-3 font-semibold shadow-dark bg-blue-500 hover:bg-blue-600"
               >
                 <Link to="/login">
-                  Login
+                  {t('Header.login')}
                 </Link>
               </button>
             }
             {
               user !== null &&
-              <button onClick={handleSignOut} className='rounded-2xl py-1 px-3 font-semibold shadow-dark bg-red-500 hover:bg-600'>
-                Sign Out
+              <button onClick={handleSignOut} className='rounded-2xl py-1 px-3 font-semibold shadow-dark bg-red-500 hover:bg-red-600'>
+                {t('Header.sign_out')}
               </button>
             }
           </div>
@@ -143,26 +155,43 @@ const Header = () => {
               name="q"
               id="search"
               className="border rounded-xl shadow py-1 pl-6 w-full md:w-40 dark:text-black"
-              placeholder="Onion Pizza"
+              placeholder={t('Header.search_placeholder')}
             />
           </div>
           <i className="fa-solid fa-cart-shopping cursor-pointer hover:text-blue-500" onClick={toggleCart}></i>
           <i className="fa-solid fa-moon cursor-pointer" id="theme-switch" onClick={toggleDarkMode}></i>
-          <i className="fa-solid fa-globe cursor-pointer"></i>
+          <div className="relative">
+            <i className="fa-solid fa-globe cursor-pointer" onClick={toggleLanguageMenu}></i>
+            {isLanguageMenuOpen && (
+              <ul className="absolute right-0 top-full mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg w-32 z-10">
+                <li>
+                  <button onClick={() => handleChangeLanguage('en')} className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    English
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => handleChangeLanguage('es')} className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    Español
+                  </button>
+                </li>
+                {/* Add more languages as needed */}
+              </ul>
+            )}
+          </div>
           {
             user === null && <button
               type="button"
               className="rounded-2xl py-1 px-3 font-semibold shadow-dark bg-blue-500 hover:bg-blue-600"
             >
               <Link to="/login">
-                Login
+                {t('Header.login')}
               </Link>
             </button>
           }
           {
             user !== null &&
-            <button onClick={handleSignOut} className='rounded-2xl py-1 px-3 font-semibold shadow-dark bg-red-500 hover:bg-600'>
-              Sign Out
+            <button onClick={handleSignOut} className='rounded-2xl py-1 px-3 font-semibold shadow-dark bg-red-500 hover:bg-red-600'>
+              {t('Header.sign_out')}
             </button>
           }
         </div>

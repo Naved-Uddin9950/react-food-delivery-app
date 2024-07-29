@@ -1,0 +1,40 @@
+{
+    "Hero": {
+        "welcome": "Bienvenido a Nuestra Tienda",
+        "discover_prices": "Descubre los mejores productos a precios inigualables.",
+        "shop_now": "Compra Ahora",
+        "amazing_deals": "Ofertas Increíbles Te Esperan",
+        "find_discounts": "Encuentra tus productos favoritos con grandes descuentos.",
+        "explore_now": "Explora Ahora"
+    },
+    "Header": {
+        "home": "Inicio",
+        "menu": "Menú",
+        "location": "Ubicación",
+        "contact": "Contacto",
+        "login": "Iniciar sesión",
+        "sign_out": "Cerrar sesión",
+        "search_placeholder": "Buscar",
+        "dark_mode": "Modo oscuro",
+        "language": "Idioma",
+        "cart": "Carrito"
+    },
+    "Footer": {
+        "order_food": "Ordena tu comida favorita",
+        "company": "EMPRESA",
+        "home": "Inicio",
+        "about_us": "Sobre Nosotros",
+        "delivery": "Entrega",
+        "privacy_policy": "Política de Privacidad",
+        "get_in_touch": "CONTACTA CON NOSOTROS",
+        "phone": "+91 1234567890",
+        "email": "contacto@test.com",
+        "address": "111, En Algún Lugar, Jaipur, Rajasthan, India",
+        "website": "Visita nuestro sitio web",
+        "copyright": "Copyright 2024 @ {{url}} - Todos los Derechos Reservados"
+    },
+    "notify": {
+        "logout_success": "Has cerrado sesión correctamente",
+        "logout_error": "Error al cerrar sesión"
+    }
+}

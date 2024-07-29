@@ -19,9 +19,8 @@ import Checkout from './components/Pages/Wallet/Checkout';
 import { Categories, Dashboard, DashboardHome, fetchCategories, fetchOrders, fetchProducts, Orders, Products } from './components/Admin/index';
 import ProductDetails from './components/Pages/Product/ProductDetails';
 import CategoryDetails from './components/Pages/Category/CategoryDetails';
-import { TranslatorProvider, useTranslate } from "react-translate";
-import { translations } from './language';
 import { AuthRoute } from './components/AuthRoutes';
+import './language';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -58,11 +57,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-
-    <TranslatorProvider translations={translations}>
-      <Provider store={store}>
-        <RouterProvider router={router} />
-      </Provider>
-    </TranslatorProvider>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>,
 )

@@ -1,12 +1,14 @@
 import React from 'react';
 import { Carousel, Button, Typography } from 'antd';
-import { useTranslate } from 'react-translate';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '../../Utils/LanguageSwitcher';
 
 const { Title, Paragraph } = Typography;
 
 const HeroSection = () => {
 
-    let lang = useTranslate("Home");
+    const { t } = useTranslation();
+
     return (
         <div className="relative h-max mb-4">
             <Carousel autoplay className="h-full max-h-[70vh]">
@@ -17,12 +19,11 @@ const HeroSection = () => {
                         alt="Hero 1"
                         className="object-cover w-full h-full max-h-[70vh]"
                     />
-                    <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+                    <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 text-white">
                         <div className="text-center text-white">
-                            {/* <Title level={1} className="text-4xl text-white">Welcome to Our Store {lang("HELLO")}</Title> */}
-                            <Title level={1} className="text-4xl text-white">Welcome to Our Store {lang("HELLO")}</Title>
-                            <Paragraph className="text-lg mt-2">Discover the best products at unbeatable prices.</Paragraph>
-                            <Button type="primary" size="large" className="mt-4">Shop Now</Button>
+                            <Title level={1} className="text-4xl text-white">{t('Hero.welcome')}</Title>
+                            <Paragraph className="text-lg mt-2">{t('Hero.discover_prices')}</Paragraph>
+                            <Button type="primary" size="large" className="mt-4">{t('Hero.shop_now')}</Button>
                         </div>
                     </div>
                 </div>
@@ -34,9 +35,9 @@ const HeroSection = () => {
                     />
                     <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
                         <div className="text-center text-white">
-                            <Title level={1} className="text-4xl">Amazing Deals Await</Title>
-                            <Paragraph className="text-lg mt-2">Find your favorite products at great discounts.</Paragraph>
-                            <Button type="primary" size="large" className="mt-4">Explore Now</Button>
+                            <Title level={1} className="text-4xl">{t('Hero.amazing_deals')}</Title>
+                            <Paragraph className="text-lg mt-2">{t('Hero.find_discounts')}</Paragraph>
+                            <Button type="primary" size="large" className="mt-4">{t('Hero.explore_now')}</Button>
                         </div>
                     </div>
                 </div>
