@@ -49,7 +49,10 @@
         "message_sent": "¡Mensaje enviado exitosamente!",
         "message_error": "Error al enviar el mensaje.",
         "payment_success": "¡Pago exitoso!",
-        "payment_error": "Error al procesar el pago: {{error}}"
+        "payment_error": "Error al procesar el pago: {{error}}",
+        "user_register_success": "Usuario registrado con éxito",
+        "signup_success": "Registro exitoso",
+        "signup_error": "Error al registrarse"
     },
     "Home": {
         "featured": "Producto Destacado",
@@ -94,5 +97,13 @@
         "zip": "Código Postal",
         "total": "Monto Total",
         "payment": "Completar Pago"
+    },
+    "Signup": {
+        "signup": "Regístrate",
+        "email": "Correo Electrónico",
+        "password": "Contraseña",
+        "google": "Regístrate con Google",
+        "hasAccount": "¿Ya tienes una cuenta?",
+        "login": "Iniciar Sesión"
     }
 }

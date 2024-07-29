@@ -49,7 +49,10 @@
         "message_sent": "Message sent successfully!",
         "message_error": "Error sending message.",
         "payment_success": "Payment Successful!",
-        "payment_error": "Error processing payment: {{error}}"
+        "payment_error": "Error processing payment: {{error}}",
+        "user_register_success": "User registered successfully",
+        "signup_success": "Signed up successfully",
+        "signup_error": "Error signing up"
     },
     "Home": {
         "featured": "Featured Product",
@@ -94,5 +97,13 @@
         "zip": "Zip Code",
         "total": "Total Amount",
         "payment": "Complete Payment"
+    },
+    "Signup": {
+        "signup": "Sign Up",
+        "email": "Email",
+        "password": "Password",
+        "google": "Sign Up with Google",
+        "hasAccount": "Already have an account?",
+        "login": "Log In"
     }
 }
