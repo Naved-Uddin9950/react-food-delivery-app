@@ -52,7 +52,9 @@
         "payment_error": "Error al procesar el pago: {{error}}",
         "user_register_success": "Usuario registrado con éxito",
         "signup_success": "Registro exitoso",
-        "signup_error": "Error al registrarse"
+        "signup_error": "Error al registrarse",
+        "login_success": "Inicio de sesión exitoso",
+        "login_error": "Error al iniciar sesión"
     },
     "Home": {
         "featured": "Producto Destacado",
@@ -105,5 +107,12 @@
         "google": "Regístrate con Google",
         "hasAccount": "¿Ya tienes una cuenta?",
         "login": "Iniciar Sesión"
+    },
+    "Login": {
+        "login": "Iniciar Sesión",
+        "haveAccount": "Ya estás conectado, ¿quieres cerrar sesión?",
+        "logout": "Cerrar Sesión",
+        "google": "Inicia Sesión con Google",
+        "noAccount": "¿No tienes una cuenta?"
     }
 }

@@ -52,7 +52,9 @@
         "payment_error": "Error processing payment: {{error}}",
         "user_register_success": "User registered successfully",
         "signup_success": "Signed up successfully",
-        "signup_error": "Error signing up"
+        "signup_error": "Error signing up",
+        "login_success": "Signed in successfully",
+        "login_error": "Error signing in"
     },
     "Home": {
         "featured": "Featured Product",
@@ -105,5 +107,12 @@
         "google": "Sign Up with Google",
         "hasAccount": "Already have an account?",
         "login": "Log In"
+    },
+    "Login": {
+        "login": "Log In",
+        "haveAccount": "You are already signed in, want to Log Out?",
+        "logout": "Logout",
+        "google": "Sign In with Google",
+        "noAccount": "Don't have an account?"
     }
 }
