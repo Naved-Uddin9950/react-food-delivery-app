@@ -7,6 +7,7 @@ import { signOut } from 'firebase/auth';
 import { useAuth } from '../../hooks/useAuth';
 import { notify } from './Notify';
 import { useTranslation } from 'react-i18next';
+import Search from './Search';
 
 const Header = () => {
   const { user } = useAuth();
@@ -112,17 +113,8 @@ const Header = () => {
             {t('Header.contact')}
           </NavLink>
 
-          <div className="relative h-max w-full md:w-auto md:hidden">
-            <label htmlFor="search" className="absolute top-1 left-1">
-              <i className="fa-solid fa-magnifying-glass text-black"></i>
-            </label>
-            <input
-              type="search"
-              name="q"
-              id="search"
-              className="border rounded-xl shadow py-1 pl-6 w-full md:w-64 dark:text-black"
-              placeholder={t('Header.search_placeholder')}
-            />
+          <div className='block w-full md:hidden'>
+            <Search />
           </div>
 
           <div className="flex md:hidden flex-row justify-center items-center gap-4">
@@ -146,18 +138,7 @@ const Header = () => {
         </div>
 
         <div className="hidden md:flex flex-row justify-center items-center gap-4">
-          <div className="relative h-max w-full md:w-auto">
-            <label htmlFor="search" className="absolute top-1 left-1">
-              <i className="fa-solid fa-magnifying-glass text-black"></i>
-            </label>
-            <input
-              type="search"
-              name="q"
-              id="search"
-              className="border rounded-xl shadow py-1 pl-6 w-full md:w-40 dark:text-black"
-              placeholder={t('Header.search_placeholder')}
-            />
-          </div>
+          <Search />
           <i className="fa-solid fa-cart-shopping cursor-pointer hover:text-blue-500" onClick={toggleCart}></i>
           <i className="fa-solid fa-moon cursor-pointer" id="theme-switch" onClick={toggleDarkMode}></i>
           <div className="relative">
