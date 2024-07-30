@@ -4,8 +4,9 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 // Translation files
-import enTranslations from './translations/en/global.json'
-import esTranslations from './translations/es/global.json'
+import english from './translations/en/global.json'
+import spanish from './translations/es/global.json'
+import japanese from './translations/jp/global.json'
 
 // Initialize i18next
 i18n
@@ -14,10 +15,13 @@ i18n
     .init({
         resources: {
             en: {
-                translation: enTranslations,
+                translation: english,
             },
             es: {
-                translation: esTranslations,
+                translation: spanish,
+            },
+            jp: {
+                translation: japanese,
             },
         },
         fallbackLng: 'en', // Default language if detection fails

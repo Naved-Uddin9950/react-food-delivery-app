@@ -155,6 +155,11 @@ const Header = () => {
                     Español
                   </button>
                 </li>
+                <li>
+                  <button onClick={() => handleChangeLanguage('jp')} className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    日本語
+                  </button>
+                </li>
                 {/* Add more languages as needed */}
               </ul>
             )}

@@ -1,0 +1,121 @@
+{
+    "Hero": {
+        "welcome": "私たちのストアへようこそ",
+        "discover_prices": "競争力のある価格で最高の製品を発見してください。",
+        "shop_now": "今すぐショッピング",
+        "amazing_deals": "驚くべき取引が待っています",
+        "find_discounts": "お気に入りの製品を素晴らしい割引価格で見つけてください。",
+        "explore_now": "今すぐ探検"
+    },
+    "Header": {
+        "home": "ホーム",
+        "menu": "メニュー",
+        "location": "所在地",
+        "contact": "お問い合わせ",
+        "login": "ログイン",
+        "sign_out": "ログアウト",
+        "search_placeholder": "検索",
+        "dark_mode": "ダークモード",
+        "language": "言語",
+        "cart": "カート"
+    },
+    "Footer": {
+        "order_food": "お気に入りの食べ物を注文する",
+        "company": "会社",
+        "home": "ホーム",
+        "about_us": "私たちについて",
+        "delivery": "配達",
+        "privacy_policy": "プライバシーポリシー",
+        "get_in_touch": "お問い合わせ",
+        "phone": "+91 1234567890",
+        "email": "contact@test.com",
+        "address": "111, Somewhere, Jaipur, Rajasthan, India",
+        "website": "ウェブサイトを訪問する",
+        "copyright": "Copyright 2024 @ {{url}} - All Rights Reserved"
+    },
+    "notify": {
+        "logout_success": "ログアウト成功",
+        "logout_error": "ログアウトエラー",
+        "name_required": "名前は必須です！",
+        "name_rules": "名前は2文字以上で、アルファベットのみで構成されている必要があります！",
+        "email_required": "メールアドレスは必須です！",
+        "email_rules": "無効なメールフォーマット！",
+        "address_required": "住所は必須です",
+        "city_required": "市町村は必須です",
+        "state_requried": "州は必須です",
+        "zip_required": "郵便番号は必須です",
+        "message_required": "メッセージは必須です！",
+        "message_sending": "フォーム送信中...",
+        "message_sent": "メッセージが成功裏に送信されました！",
+        "message_error": "メッセージ送信エラー。",
+        "payment_success": "支払い成功！",
+        "payment_error": "支払い処理エラー: {{error}}",
+        "user_register_success": "ユーザー登録成功",
+        "signup_success": "サインアップ成功",
+        "signup_error": "サインアップエラー",
+        "login_success": "ログイン成功",
+        "login_error": "ログインエラー"
+    },
+    "Home": {
+        "featured": "注目の製品",
+        "special": "特別オファー"
+    },
+    "Menu": {
+        "welcome": "{{name}}へようこそ",
+        "categories": "カテゴリー"
+    },
+    "Location": {
+        "location": "所在地",
+        "heading": "私たちの所在地",
+        "address": "住所",
+        "contact": "連絡先",
+        "operation": "営業時間",
+        "hours": "月曜日から金曜日: 9:00 AM - 6:00 PM",
+        "phone": "電話",
+        "email": "メール"
+    },
+    "Contact": {
+        "contact": "お問い合わせ",
+        "name": "名前",
+        "email": "メール",
+        "message": "メッセージ",
+        "send": "メッセージを送信"
+    },
+    "Cart": {
+        "cart": "ショッピングカート",
+        "empty": "カートは空です。",
+        "goto": "カートに移動",
+        "total": "合計",
+        "checkout": "チェックアウト"
+    },
+    "Checkout": {
+        "checkout": "チェックアウト",
+        "empty": "カートが空です。支払いを行うには何かを注文してください",
+        "fullname": "フルネーム",
+        "email": "メール",
+        "address": "住所",
+        "city": "市町村",
+        "state": "州",
+        "zip": "郵便番号",
+        "total": "合計金額",
+        "payment": "支払いを完了する"
+    },
+    "Signup": {
+        "signup": "サインアップ",
+        "email": "メール",
+        "password": "パスワード",
+        "google": "Googleでサインアップ",
+        "hasAccount": "すでにアカウントをお持ちですか？",
+        "login": "ログイン"
+    },
+    "Login": {
+        "login": "ログイン",
+        "haveAccount": "すでにサインインしています。ログアウトしますか？",
+        "logout": "ログアウト",
+        "google": "Googleでサインイン",
+        "noAccount": "アカウントをお持ちでないですか？"
+    },
+    "Auth": {
+        "login_first": "まずログインする必要があります"
+    }
+}
