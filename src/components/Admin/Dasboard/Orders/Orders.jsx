@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Select, Modal, Space } from 'antd';
-import { Breadcrumb } from 'antd';
+import { Table, Select, Modal, Space, Breadcrumb } from 'antd';
 import { HomeOutlined, ShoppingCartOutlined, DeleteTwoTone } from '@ant-design/icons';
 import { collection, getDocs, updateDoc, doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../../../../firebaseConfig';
 import { useLoaderData } from 'react-router-dom';
 
-const LOCAL_STORAGE_KEY = 'cachedOrders';
-
 export const fetchOrders = async () => {
   try {
-    const cachedOrders = localStorage.getItem(LOCAL_STORAGE_KEY);
-    if (cachedOrders) {
-      return JSON.parse(cachedOrders);
-    }
-
     const ordersCollection = collection(db, 'orders');
     const orderSnapshot = await getDocs(ordersCollection);
     const orders = orderSnapshot.docs.map(doc => ({
@@ -22,14 +14,12 @@ export const fetchOrders = async () => {
       ...doc.data(),
     }));
 
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(orders));
     return orders;
   } catch (error) {
     console.error('Error fetching orders:', error);
     return [];
   }
 };
-
 
 const { Option } = Select;
 
@@ -53,9 +43,9 @@ const Orders = () => {
       updatedOrders.sort((a, b) => {
         switch (sortOption) {
           case 'orderIdAsc':
-            return a.order_id.toString().localeCompare(b.order_id.toString());
+            return a.key.localeCompare(b.key);
           case 'orderIdDesc':
-            return b.order_id.toString().localeCompare(a.order_id.toString());
+            return b.key.localeCompare(a.key);
           case 'priceAsc':
             return (a.price * a.quantity) - (b.price * b.quantity);
           case 'priceDesc':
@@ -81,7 +71,6 @@ const Orders = () => {
         }
       });
 
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(orders));
       setFilteredOrders(updatedOrders);
     };
 
@@ -121,9 +110,9 @@ const Orders = () => {
   const columns = [
     {
       title: 'Order ID',
-      dataIndex: 'order_id',
-      key: 'order_id',
-      sorter: (a, b) => a.order_id.toString().localeCompare(b.order_id.toString()),
+      dataIndex: 'key',
+      key: 'key',
+      sorter: (a, b) => a.key.localeCompare(b.key),
       sortOrder: sortOption === 'orderIdAsc' ? 'ascend' : sortOption === 'orderIdDesc' ? 'descend' : null,
     },
     {
@@ -152,7 +141,7 @@ const Orders = () => {
       dataIndex: 'price',
       key: 'price',
       render: (text, record) => (
-        `$${(record.price).toFixed(2)}`
+        `$${parseFloat(record.price).toFixed(2)}`
       ),
     },
     {
@@ -258,29 +247,36 @@ const Orders = () => {
           <Option value="productNameDesc">Product Name - Z to A</Option>
         </Select>
 
-        <label className="ml-4 mr-2">Filter by Status:</label>
+        <label className="ml-4 mr-2">Filter by status:</label>
         <Select
           defaultValue="All"
-          style={{ width: 200 }}
+          style={{ width: 180 }}
           onChange={handleStatusFilterChange}
         >
           {statusOptions.map(status => (
-            <Option key={status} value={status}>{status}</Option>
+            <Option key={status} value={status}>
+              {status}
+            </Option>
           ))}
         </Select>
       </div>
 
       <Table
         columns={columns}
-        dataSource={filteredOrders}
-        pagination={{ pageSize, defaultPageSize: 5 }}
+        dataSource={filteredOrders.slice(0, pageSize)}
+        pagination={{
+          pageSize: pageSize,
+          total: filteredOrders.length,
+        }}
       />
 
       <Modal
-        title="Confirm Delete"
-        visible={deletingOrder !== null}
+        title="Delete Order"
+        visible={!!deletingOrder}
         onOk={handleDelete}
         onCancel={handleCancel}
+        okText="Delete"
+        cancelText="Cancel"
       >
         <p>Are you sure you want to delete this order?</p>
       </Modal>
