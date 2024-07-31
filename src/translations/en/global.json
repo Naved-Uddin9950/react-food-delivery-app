@@ -125,6 +125,7 @@
         "customer_name": "Customer Name",
         "price": "Price",
         "quantity": "Quantity",
-        "status": "Status"
+        "status": "Status",
+        "timestamp": "Timestamp"
     }
 }

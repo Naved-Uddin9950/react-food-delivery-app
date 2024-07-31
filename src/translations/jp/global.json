@@ -125,6 +125,7 @@
         "customer_name": "顧客名",
         "price": "価格",
         "quantity": "数量",
-        "status": "状態"
+        "status": "状態",
+        "timestamp": "タイムスタンプ"
     }
 }

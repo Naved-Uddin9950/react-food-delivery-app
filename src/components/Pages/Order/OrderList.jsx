@@ -40,11 +40,11 @@ const OrderList = () => {
     }, [user]);
 
     if (loading) {
-        return <Loader />
+        return <Loader />;
     }
 
     const handleRowClick = (record) => {
-        navigate(`/track-order/${record.id}`); // Navigate to the order detail page
+        navigate(`/track-order/${record.id}`);
     };
 
     const columns = [
@@ -89,17 +89,20 @@ const OrderList = () => {
     ];
 
     return (
-        <div className="p-8 dark:text-white">
-            <h1 className="text-4xl font-bold mb-8">{t('OrderList.title')}</h1>
+        <div className="p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 dark:text-white">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 md:mb-8 lg:mb-10 xl:mb-12">
+                {t('OrderList.title')}
+            </h1>
             <Table
                 dataSource={orders}
                 columns={columns}
                 rowKey="id"
-                className='bg-white rounded-xl shadow-dark'
+                className="bg-white rounded-xl shadow-md sm:shadow-lg lg:shadow-xl"
                 rowClassName="hover:cursor-pointer"
                 onRow={(record) => ({
                     onClick: () => handleRowClick(record),
                 })}
+                scroll={{ x: 'max-content' }}
             />
         </div>
     );

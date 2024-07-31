@@ -125,6 +125,7 @@
         "customer_name": "Nombre del Cliente",
         "price": "Precio",
         "quantity": "Cantidad",
-        "status": "Estado"
+        "status": "Estado",
+        "timestamp": "Fecha y hora"
     }
 }
