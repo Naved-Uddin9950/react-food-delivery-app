@@ -8,6 +8,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { notify } from './Notify';
 import { useTranslation } from 'react-i18next';
 import Search from './Search';
+import { ShoppingCartOutlined, GlobalOutlined, MoonFilled, SunFilled, HistoryOutlined } from '@ant-design/icons';
 
 const Header = () => {
   const { user } = useAuth();
@@ -20,6 +21,7 @@ const Header = () => {
   const toggleDarkMode = () => {
     setTheme(!theme);
     document.documentElement.classList.toggle('dark', !theme);
+    console.log(theme);
   };
 
   const toggleMenu = () => {
@@ -58,9 +60,36 @@ const Header = () => {
           </div>
           <div className="md:hidden flex items-center gap-2">
             <div className="h-max w-full md:w-auto flex flex-row gap-4 justify-center items-center mx-12">
-              <i className="fa-solid fa-cart-shopping cursor-pointer hover:text-blue-500" onClick={toggleCart}></i>
-              <i className="fa-solid fa-moon cursor-pointer" id="theme-switch" onClick={toggleDarkMode}></i>
-              <i className="fa-solid fa-globe cursor-pointer" onClick={toggleLanguageMenu}></i>
+              <Link to="/orders">
+                <HistoryOutlined className="text-lg cursor-pointer hover:text-blue-500" />
+              </Link>
+              <ShoppingCartOutlined className="text-xl cursor-pointer hover:text-blue-500" onClick={toggleCart} />
+              {
+                theme ? <SunFilled className="text-xl cursor-pointer" onClick={toggleDarkMode} /> : <MoonFilled className="text-lg cursor-pointer" onClick={toggleDarkMode} />
+              }
+              <div className="relative">
+                <GlobalOutlined className="text-lg cursor-pointer hover:text-blue-500" onClick={toggleLanguageMenu} />
+                {isLanguageMenuOpen && (
+                  <ul className="absolute right-0 top-full mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg w-32 z-10">
+                    <li>
+                      <button onClick={() => handleChangeLanguage('en')} className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        English
+                      </button>
+                    </li>
+                    <li>
+                      <button onClick={() => handleChangeLanguage('es')} className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        Español
+                      </button>
+                    </li>
+                    <li>
+                      <button onClick={() => handleChangeLanguage('jp')} className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        日本語
+                      </button>
+                    </li>
+                    {/* Add more languages as needed */}
+                  </ul>
+                )}
+              </div>
             </div>
             <button className="text-3xl" onClick={toggleMenu}>
               <i className="fa-solid fa-bars"></i>
@@ -139,10 +168,15 @@ const Header = () => {
 
         <div className="hidden md:flex flex-row justify-center items-center gap-4">
           <Search />
-          <i className="fa-solid fa-cart-shopping cursor-pointer hover:text-blue-500" onClick={toggleCart}></i>
-          <i className="fa-solid fa-moon cursor-pointer" id="theme-switch" onClick={toggleDarkMode}></i>
+          <Link to="/orders">
+            <HistoryOutlined className="text-lg cursor-pointer hover:text-blue-500" />
+          </Link>
+          <ShoppingCartOutlined className="text-xl cursor-pointer hover:text-blue-500" onClick={toggleCart} />
+          {
+            theme ? <SunFilled className="text-xl cursor-pointer" onClick={toggleDarkMode} /> : <MoonFilled className="text-lg cursor-pointer" onClick={toggleDarkMode} />
+          }
           <div className="relative">
-            <i className="fa-solid fa-globe cursor-pointer" onClick={toggleLanguageMenu}></i>
+            <GlobalOutlined className="text-lg cursor-pointer hover:text-blue-500" onClick={toggleLanguageMenu} />
             {isLanguageMenuOpen && (
               <ul className="absolute right-0 top-full mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg w-32 z-10">
                 <li>

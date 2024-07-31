@@ -117,5 +117,14 @@
     },
     "Auth": {
         "login_first": "Debes iniciar sesión primero"
+    },
+    "OrderList": {
+        "title": "Tus Pedidos",
+        "order_id": "ID del Pedido",
+        "product_name": "Nombre del Producto",
+        "customer_name": "Nombre del Cliente",
+        "price": "Precio",
+        "quantity": "Cantidad",
+        "status": "Estado"
     }
 }

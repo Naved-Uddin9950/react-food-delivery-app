@@ -117,5 +117,14 @@
     },
     "Auth": {
         "login_first": "まずログインする必要があります"
+    },
+    "OrderList": {
+        "title": "あなたの注文",
+        "order_id": "注文ID",
+        "product_name": "商品名",
+        "customer_name": "顧客名",
+        "price": "価格",
+        "quantity": "数量",
+        "status": "状態"
     }
 }

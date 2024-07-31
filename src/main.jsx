@@ -21,6 +21,8 @@ import ProductDetails from './components/Pages/Product/ProductDetails';
 import CategoryDetails from './components/Pages/Category/CategoryDetails';
 import { AuthRoute } from './components/AuthRoutes';
 import './language';
+import TrackOrder from './components/Pages/Order/TrackOrder';
+import OrderList from './components/Pages/Order/OrderList';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -41,6 +43,9 @@ const router = createBrowserRouter(
 
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/category/:id" element={<CategoryDetails />} />
+
+        <Route path="/orders" element={<AuthRoute element={OrderList} />} />
+        <Route path="/track-order/:orderId" element={<AuthRoute element={TrackOrder} />} />
 
       </Route>
 

@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { addOrder } from '../../../database/orderService';
 import { useTranslation } from 'react-i18next';
 import { notify } from '../../Utils/Notify';
+import { getAuth } from 'firebase/auth';
 
 const Checkout = () => {
     const [formData, setFormData] = useState({
@@ -29,21 +30,47 @@ const Checkout = () => {
         });
     };
 
+    const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    };
+
     const handlePayment = async () => {
         try {
-            notify('success', t('notify.payment_success'));
+            const auth = getAuth();
+            const user = auth.currentUser;
 
-            // Add each item in the cart to Firestore
+            if (!user) {
+                notify('error', t('notify.payment_error', { error: 'You need to login first' }));
+                return;
+            }
+
+            notify('success', t('notify.payment_success'));
+            
+            const currentDate = new Date();
+            const formattedDate = formatDate(currentDate);
+
             const orderPromises = cartItems.map(item => {
                 const order = {
-                    order_id: Date.now(), // Unique ID for the order
+                    user_id: user.uid,
                     product_name: item.name,
                     customer_name: formData.name,
+                    email: formData.email,
+                    address: formData.address,
+                    city: formData.city,
+                    state: formData.state,
+                    zip: formData.zip,
                     price: item.price,
                     quantity: item.quantity,
-                    status: 'ongoing', // Default status
+                    status: 'Ongoing',
+                    timestamp: formattedDate,
                 };
-                return addOrder(order); // Add order to Firestore
+                return addOrder(order);
             });
             await Promise.all(orderPromises);
 
@@ -72,7 +99,7 @@ const Checkout = () => {
             return false;
         }
 
-        if (name.length < 2 || !/^[A-Za-z]+$/.test(name)) {
+        if (name.length < 2 || !/^[A-Za-z\s]+$/.test(name)) {
             notify('error', t('notify.name_rules'));
             return false;
         }

@@ -117,5 +117,14 @@
     },
     "Auth": {
         "login_first": "You need to login first"
+    },
+    "OrderList": {
+        "title": "Your Orders",
+        "order_id": "Order ID",
+        "product_name": "Product Name",
+        "customer_name": "Customer Name",
+        "price": "Price",
+        "quantity": "Quantity",
+        "status": "Status"
     }
 }
