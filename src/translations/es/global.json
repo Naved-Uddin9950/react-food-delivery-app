@@ -127,5 +127,26 @@
         "quantity": "Cantidad",
         "status": "Estado",
         "timestamp": "Fecha y hora"
+    },
+    "OrderTrack": {
+        "orderTracking": "Seguimiento de Pedido",
+        "orderID": "ID del Pedido: {{orderId}}",
+        "orderDetails": "Detalles del Pedido",
+        "customerName": "Nombre del Cliente:",
+        "productName": "Nombre del Producto:",
+        "quantity": "Cantidad:",
+        "price": "Precio:",
+        "total": "Total:",
+        "orderPlaced": "Pedido Realizado",
+        "orderPlaced_desc": "Tu pedido ha sido realizado",
+        "ongoing": "En Proceso",
+        "ongoing_desc": "Tu pedido está siendo procesado",
+        "shipped": "Enviado",
+        "shipped_desc": "Tu pedido ha sido enviado",
+        "delivered": "Entregado",
+        "delivered_desc": "Tu pedido ha sido entregado",
+        "cancelled": "Cancelado",
+        "cancelled_desc": "Tu pedido ha sido cancelado",
+        "errorOrderNotFound": "Pedido no encontrado"
     }
 }

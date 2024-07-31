@@ -127,5 +127,26 @@
         "quantity": "数量",
         "status": "状態",
         "timestamp": "タイムスタンプ"
+    },
+    "OrderTrack": {
+        "orderTracking": "注文追跡",
+        "orderID": "注文ID: {{orderId}}",
+        "orderDetails": "注文の詳細",
+        "customerName": "顧客名:",
+        "productName": "商品名:",
+        "quantity": "数量:",
+        "price": "価格:",
+        "total": "合計:",
+        "orderPlaced": "注文確定",
+        "orderPlaced_desc": "ご注文が確定しました",
+        "ongoing": "処理中",
+        "ongoing_desc": "ご注文が処理中です",
+        "shipped": "発送済み",
+        "shipped_desc": "ご注文が発送されました",
+        "delivered": "配達済み",
+        "delivered_desc": "ご注文が配達されました",
+        "cancelled": "キャンセル済み",
+        "cancelled_desc": "ご注文がキャンセルされました",
+        "errorOrderNotFound": "注文が見つかりません"
     }
 }

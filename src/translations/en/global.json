@@ -127,5 +127,26 @@
         "quantity": "Quantity",
         "status": "Status",
         "timestamp": "Timestamp"
+    },
+    "OrderTrack": {
+        "orderTracking": "Order Tracking",
+        "orderID": "Order ID: {{orderId}}",
+        "orderDetails": "Order Details",
+        "customerName": "Customer Name:",
+        "productName": "Product Name:",
+        "quantity": "Quantity:",
+        "price": "Price:",
+        "total": "Total:",
+        "orderPlaced": "Order Placed",
+        "orderPlaced_desc": "Your order has been placed",
+        "ongoing": "Ongoing",
+        "ongoing_desc": "Your order is being processed",
+        "shipped": "Shipped",
+        "shipped_desc": "Your order has been shipped",
+        "delivered": "Delivered",
+        "delivered_desc": "Your order has been delivered",
+        "cancelled": "Cancelled",
+        "cancelled_desc": "Your order has been cancelled",
+        "errorOrderNotFound": "Order not found"
     }
 }
